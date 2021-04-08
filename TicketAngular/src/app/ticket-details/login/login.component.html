@@ -1,0 +1,28 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="userId"
+    [value]="service.formData.userId" />
+
+    <h1>LOGIN PAGE</h1>
+
+    <div class="form-group">
+        <label>Username</label>
+        <input class="form-control form-control-lg" placeholder="Username"
+        name="username" #username="ngModel" [(ngModel)]="service.formData.username" required [class.invalid]="username.invalid && username.touched">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Password</label>
+            <input type="password" class="form-control form-control-lg" placeholder="Password"
+            name="password" #password="ngModel" [(ngModel)]="service.formData.password" required minlength="3" [class.invalid]="password.invalid && password.touched">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" (click)="redirectToRegister()">REGISTER</button>
+    </div>
+</form>

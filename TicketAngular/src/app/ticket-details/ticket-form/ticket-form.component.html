@@ -1,0 +1,41 @@
+<form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+    <input type="hidden" name="ticketDetailId"
+    [value]="service.formData.ticketDetailId" />
+
+    <div class="form-group">
+        <label>Description</label>
+        <input class="form-control form-control-lg" placeholder="Ticket Description"
+        name="description" #description="ngModel" [(ngModel)]="service.formData.description">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Ticket Severity</label>
+            <input class="form-control form-control-lg" placeholder="Severity(Low/Medium/High)"
+            name="severity" #severity="ngModel" [(ngModel)]="service.formData.severity" required maxlength="6" minlength="3" [class.invalid]="severity.invalid && severity.touched">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Date Created</label>
+            <input type="date" class="form-control form-control-lg" placeholder="MM/DD/YYYY"
+            name="dateCreated" #dateCreated="ngModel" [(ngModel)]="service.formData.dateCreated" required [class.invalid]="dateCreated.invalid && dateCreated.touched">
+        </div>
+
+        <div class="form-check col-md-6">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Active" checked #status="ngModel" [(ngModel)]="service.formData.status">
+            <label class="form-check-label" for="exampleRadios1">
+              Active
+            </label>
+          </div>
+        <div class="form-check col-md-6">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Resolved" #status="ngModel" [(ngModel)]="service.formData.status">
+            <label class="form-check-label" for="exampleRadios2">
+              Resolved
+            </label>
+        </div>    
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+    </div>
+</form>

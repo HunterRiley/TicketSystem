@@ -1,0 +1,69 @@
+<div class="jumbotron py-3">
+    <h1 class="display-4 text-center">Ticket System</h1>
+    <p></p>
+</div>
+
+<div class="row">
+    <div class="col-md-6" > <!-- *ngIf="userService.formData.type === 'Admin'" -->
+        
+        <app-ticket-form></app-ticket-form>
+    </div>
+    
+    <div class="col-md-6" >
+        <h1>Active Tickets</h1>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th [mdbTableSort]="service.list" sortBy="ticketDetailId">ID</th>
+                    <th [mdbTableSort]="service.list" sortBy="severity">Severity</th>
+                    <th [mdbTableSort]="service.list" sortBy="description">Description</th>
+                    <th [mdbTableSort]="service.list" sortBy="dateCreated">Date Created</th>
+                    <th [mdbTableSort]="service.list" sortBy="status">Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let ticket of service.list">
+                <tr  *ngIf="ticket.status === 'Active'">
+                    <td (click)="populateForm(ticket)">{{ticket.ticketDetailId}}</td>
+                    <td (click)="populateForm(ticket)">{{ticket.severity}}</td>
+                    <td (click)="populateForm(ticket)">{{ticket.description}}</td>
+                    <td (click)="populateForm(ticket)">{{ticket.dateCreated}}</td>
+                    <td (click)="populateForm(ticket)" >{{ticket.status}}</td>
+                    <td>
+                        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ticket.ticketDetailId)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-6" >
+        <h1>Resolved Tickets</h1>
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th [mdbTableSort]="service.list" sortBy="ticketDetailId">ID</th>
+                    <th [mdbTableSort]="service.list" sortBy="severity">Severity</th>
+                    <th [mdbTableSort]="service.list" sortBy="description">Description</th>
+                    <th [mdbTableSort]="service.list" sortBy="dateCreated">Date Created</th>
+                    <th [mdbTableSort]="service.list" sortBy="status">Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let ticket of service.list">
+                <tr  *ngIf="ticket.status === 'Resolved'">
+                    <td (click)="populateForm(ticket)">{{ticket.ticketDetailId}}</td>
+                    <td (click)="populateForm(ticket)">{{ticket.severity}}</td>
+                    <td (click)="populateForm(ticket)">{{ticket.description}}</td>
+                    <td (click)="populateForm(ticket)">{{ticket.dateCreated}}</td>
+                    <td (click)="populateForm(ticket)" >{{ticket.status}}</td>
+                    <td>
+                        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ticket.ticketDetailId)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
