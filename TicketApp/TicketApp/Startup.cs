@@ -28,8 +28,8 @@ namespace TicketApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddDbContext<TicketDB>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+           /* services.AddDbContext<TicketDB>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));*/
 
             services.AddDbContext<AuthenticationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));

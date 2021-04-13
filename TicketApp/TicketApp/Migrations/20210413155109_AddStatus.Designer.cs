@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketApp.Models;
 
-namespace TicketApp.Migrations.Authentication
+namespace TicketApp.Migrations
 {
     [DbContext(typeof(AuthenticationContext))]
-    [Migration("20210406202534_AddUserTable")]
-    partial class AddUserTable
+    [Migration("20210413155109_AddStatus")]
+    partial class AddStatus
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,6 +42,30 @@ namespace TicketApp.Migrations.Authentication
                     b.HasKey("UserId");
 
                     b.ToTable("AuthenticationDetails");
+                });
+
+            modelBuilder.Entity("TicketApp.Models.TicketDetail", b =>
+                {
+                    b.Property<int>("TicketDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DateCreated")
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Severity")
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("TicketDetailId");
+
+                    b.ToTable("TicketDetails");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,9 +13,9 @@ namespace TicketApp.Controllers
     [ApiController]
     public class TicketDetailController : ControllerBase
     {
-        private readonly TicketDB _context;
+        private readonly AuthenticationContext _context;
 
-        public TicketDetailController(TicketDB context)
+        public TicketDetailController(AuthenticationContext context)
         {
             _context = context;
         }

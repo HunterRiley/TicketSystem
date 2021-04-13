@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TicketApp.Models
 {
-    public class TicketDB:DbContext
+    /*public class TicketDB:DbContext
     {
         public TicketDB(DbContextOptions<TicketDB> options):base(options)
         {
@@ -14,5 +14,5 @@ namespace TicketApp.Models
         }
 
         public DbSet<TicketDetail> TicketDetails { get; set; }
-    }
+    }*/
 }

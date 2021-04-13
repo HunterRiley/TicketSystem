@@ -14,5 +14,7 @@ namespace TicketApp.Models
         }
 
         public DbSet<AuthenticationDetail> AuthenticationDetails { get; set; }
+        public DbSet<TicketDetail> TicketDetails { get; set; }
     }
 }
+
