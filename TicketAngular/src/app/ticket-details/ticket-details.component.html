@@ -1,68 +1,107 @@
 <div class="jumbotron py-3">
     <h1 class="display-4 text-center">Ticket System</h1>
-    <p></p>
+    <p>Welcome {{userService.formData.username}}</p>
 </div>
 
 <div class="row">
-    <div class="col-md-6" > <!-- *ngIf="userService.formData.type === 'Admin'" -->
-        
+    <div class="col-md-6" > <!-- *ngIf="userService.formData.type === 'Admin'" --> 
         <app-ticket-form></app-ticket-form>
     </div>
     
-    <div class="col-md-6" >
-        <h1>Active Tickets</h1>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th [mdbTableSort]="service.list" sortBy="ticketDetailId">ID</th>
-                    <th [mdbTableSort]="service.list" sortBy="severity">Severity</th>
-                    <th [mdbTableSort]="service.list" sortBy="description">Description</th>
-                    <th [mdbTableSort]="service.list" sortBy="dateCreated">Date Created</th>
-                    <th [mdbTableSort]="service.list" sortBy="status">Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let ticket of service.list">
-                <tr  *ngIf="ticket.status === 'Active'">
-                    <td (click)="populateForm(ticket)">{{ticket.ticketDetailId}}</td>
-                    <td (click)="populateForm(ticket)">{{ticket.severity}}</td>
-                    <td (click)="populateForm(ticket)">{{ticket.description}}</td>
-                    <td (click)="populateForm(ticket)">{{ticket.dateCreated}}</td>
-                    <td (click)="populateForm(ticket)" >{{ticket.status}}</td>
-                    <td>
-                        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ticket.ticketDetailId)"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+        <li class="nav-item" role="presentation" id="tab1">
+            <a
+                class="nav-link active"
+                id="ex1-tab-1"
+                data-mdb-toggle="tab"
+                href="#ex1-tabs-1"
+                role="tab"
+                aria-controls="ex1-tabs-1"
+                aria-selected="true"
+            >Active</a>
+        </li>
+        <li class="nav-item" role="presentation" id="tab2">
+            <a
+                class="nav-link"
+                id="ex1-tab-2"
+                data-mdb-toggle="tab"
+                href="#ex1-tabs-2"
+                role="tab"
+                aria-controls="ex1-tabs-2"
+                aria-selected="false"
+            >Resolved</a>
+        </li>
+    </ul>
 
-    <div class="col-md-6" >
-        <h1>Resolved Tickets</h1>
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th [mdbTableSort]="service.list" sortBy="ticketDetailId">ID</th>
-                    <th [mdbTableSort]="service.list" sortBy="severity">Severity</th>
-                    <th [mdbTableSort]="service.list" sortBy="description">Description</th>
-                    <th [mdbTableSort]="service.list" sortBy="dateCreated">Date Created</th>
-                    <th [mdbTableSort]="service.list" sortBy="status">Status</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let ticket of service.list">
-                <tr  *ngIf="ticket.status === 'Resolved'">
-                    <td (click)="populateForm(ticket)">{{ticket.ticketDetailId}}</td>
-                    <td (click)="populateForm(ticket)">{{ticket.severity}}</td>
-                    <td (click)="populateForm(ticket)">{{ticket.description}}</td>
-                    <td (click)="populateForm(ticket)">{{ticket.dateCreated}}</td>
-                    <td (click)="populateForm(ticket)" >{{ticket.status}}</td>
-                    <td>
-                        <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ticket.ticketDetailId)"></i>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="tab-content" id="ex1-content">
+        <div
+            class="tab-pane fade show active"
+            id="ex1-tabs-1"
+            role="tabpanel"
+            aria-labelledby="ex1-tabs-1"
+        >
+            <h1>Active Tickets</h1>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th [mdbTableSort]="service.list" sortBy="ticketDetailId">ID</th>
+                        <th [mdbTableSort]="service.list" sortBy="severity">Severity</th>
+                        <th [mdbTableSort]="service.list" sortBy="description">Description</th>
+                        <th [mdbTableSort]="service.list" sortBy="dateCreated">Date Created</th>
+                        <th [mdbTableSort]="service.list" sortBy="status">Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let ticket of service.list">
+                    <tr  *ngIf="ticket.status === 'Active'">
+                        <td (click)="populateForm(ticket)">{{ticket.ticketDetailId}}</td>
+                        <td (click)="populateForm(ticket)">{{ticket.severity}}</td>
+                        <td (click)="populateForm(ticket)">{{ticket.description}}</td>
+                        <td (click)="populateForm(ticket)">{{ticket.dateCreated}}</td>
+                        <td (click)="populateForm(ticket)" >{{ticket.status}}</td>
+                        <td>
+                            <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ticket.ticketDetailId)"></i>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-lg btn-block" type="button" (click)="statusResolved(ticket)">RESOLVE</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tabs-2">
+            <h1>Resolved Tickets</h1>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th [mdbTableSort]="service.list" sortBy="ticketDetailId">ID</th>
+                        <th [mdbTableSort]="service.list" sortBy="severity">Severity</th>
+                        <th [mdbTableSort]="service.list" sortBy="description">Description</th>
+                        <th [mdbTableSort]="service.list" sortBy="dateCreated">Date Created</th>
+                        <th [mdbTableSort]="service.list" sortBy="status">Status</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let ticket of service.list">
+                    <tr  *ngIf="ticket.status === 'Resolved'">
+                        <td (click)="populateForm(ticket)">{{ticket.ticketDetailId}}</td>
+                        <td (click)="populateForm(ticket)">{{ticket.severity}}</td>
+                        <td (click)="populateForm(ticket)">{{ticket.description}}</td>
+                        <td (click)="populateForm(ticket)">{{ticket.dateCreated}}</td>
+                        <td (click)="populateForm(ticket)" >{{ticket.status}}</td>
+                        <td>
+                            <i class="far fa-trash-alt fa-lg text-danger" (click)="onDelete(ticket.ticketDetailId)"></i>
+                        </td>
+                        <td>
+                            <button class="btn btn-info btn-lg btn-block" type="button" (click)="statusActivated(ticket)">ACTIVATE</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

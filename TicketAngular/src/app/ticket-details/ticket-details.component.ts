@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TicketService } from '../shared/ticket-service.model';
 import { TicketServiceService } from '../shared/ticket-service.service';
 import { UserServiceService } from '../shared/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-ticket-details',
@@ -39,6 +40,37 @@ export class TicketDetailsComponent implements OnInit {
         },
         err =>{console.log(err)}
       )
+    }
+  }
+
+  updateRecord(form:TicketServiceService) {
+    this.service.putTicketDetail().subscribe(
+      res => {
+        this.service.refreshList();
+        this.toastr.info('Updated Successfully', 'Ticket Submission')
+      },
+      err =>{console.log(err);}
+    );
+
+  }
+
+  statusResolved(selectedRecord:TicketService) {
+    //console.log(selectedRecord);
+    this.service.formData = selectedRecord;
+    if(selectedRecord.status === 'Active') {
+      console.log(this.service);
+      selectedRecord.status = "Resolved";
+      this.updateRecord(this.service);
+    }
+  }
+
+  statusActivated(selectedRecord:TicketService) {
+    //console.log(selectedRecord);
+    this.service.formData = selectedRecord;
+    if(selectedRecord.status === 'Resolved') {
+      console.log(this.service);
+      selectedRecord.status = "Active";
+      this.updateRecord(this.service);
     }
   }
 

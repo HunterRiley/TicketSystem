@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
                 var result = this.list.filter(obj => {
                   return obj.username === this.service.formData.username && obj.password === this.service.formData.password
                 });
+                //Sets formData to the User that has logged in
                 this.service.formData = result[0]
                 this.toastr.success('Login Successful!', 'Ticket System');
                 this.route.navigate(['/ticket-details']);

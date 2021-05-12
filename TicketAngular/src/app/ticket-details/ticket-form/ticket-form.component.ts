@@ -20,10 +20,14 @@ export class TicketFormComponent implements OnInit {
   }
 
   onSubmit(form:NgForm) {
-    if(this.service.formData.ticketDetailId == 0)
+    if (this.service.formData.ticketDetailId == 0) {
+      this.service.formData.status = 'Active';
       this.insertRecord(form);
-    else
+    }
+    else {
+      //this.service.formData.status = 'Active';
       this.updateRecord(form);
+    }
   }
 
   insertRecord(form:NgForm) {
