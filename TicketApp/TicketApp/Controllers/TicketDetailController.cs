@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TicketApp.Models;
-using TicketApp.Services;
 
 namespace TicketApp.Controllers
 {
@@ -14,30 +13,25 @@ namespace TicketApp.Controllers
     [ApiController]
     public class TicketDetailController : ControllerBase
     {
-        //private readonly TicketInfoRepository _context;
-        private readonly TicketInfoRepository _ticketInfoRepo;
+        private readonly AuthenticationContext _context;
 
-        public TicketDetailController(TicketInfoRepository ticketInfoRepo)
+        public TicketDetailController(AuthenticationContext context)
         {
-            //_context = context;
-            _ticketInfoRepo = ticketInfoRepo ??
-                throw new ArgumentNullException(nameof(ticketInfoRepo));
-
+            _context = context;
         }
 
         // GET: api/TicketDetail
         [HttpGet]
-        public Task<ActionResult<IEnumerable<TicketDetail>>> GetTicketDetails()
+        public async Task<ActionResult<IEnumerable<TicketDetail>>> GetTicketDetails()
         {
-            var tickets = _ticketInfoRepo.GetTickets();
-            return (Task<ActionResult<IEnumerable<TicketDetail>>>)tickets;
+            return await _context.TicketDetails.ToListAsync();
         }
 
         // GET: api/TicketDetail/5
         [HttpGet("{id}")]
-        public Task<ActionResult<TicketDetail>> GetTicketDetail(int id)
+        public async Task<ActionResult<TicketDetail>> GetTicketDetail(int id)
         {
-            var ticketDetail = _ticketInfoRepo.GetTicket(id);
+            var ticketDetail = await _context.TicketDetails.FindAsync(id);
 
             if (ticketDetail == null)
             {
