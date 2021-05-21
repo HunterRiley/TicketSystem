@@ -6,7 +6,7 @@ using TicketApp.Models;
 
 namespace TicketApp.Services
 {
-    public class TicketInfoRepository
+    public class TicketInfoRepository : ITicketInfoRepository
     {
         private readonly AuthenticationContext _context;
 
